@@ -15,7 +15,7 @@ public class TileManager {
         
         this.gp = gp;
 
-        tile = new Tile[16];
+        tile = new Tile[10];
         mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
 
         getTileImage();
@@ -24,7 +24,6 @@ public class TileManager {
 
     public void getTileImage() {
         try {
-
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("grass.png"));
 
@@ -33,7 +32,6 @@ public class TileManager {
 
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("water.png"));
-
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -56,18 +54,19 @@ public class TileManager {
 
                     String numbers[] = line.split(" ");
 
-                    int num = Integer.parseInt(numbers[col]);
+                    int num = Integer.parseInt(numbers[col], 10);
 
                     mapTileNum[col][row] = num;
                     col++;
 
                 }
+
                 if(col == gp.maxScreenCol) {
                     col = 0; row++;
-                }
-                br.close();
+                }   
 
             }
+            br.close();
 
         } catch(Exception e) {
             e.printStackTrace();
